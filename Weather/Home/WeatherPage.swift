@@ -20,10 +20,12 @@ struct WeatherPage: View {
 
             } label: {
                 Text("Filter")
+                    .font(.title3)
                     .frame(maxWidth: .infinity)
                     .foregroundColor(Color("TextColor"))
             }
             .padding(.top, 10)
+            .padding(.bottom, 10)
             .buttonStyle(.borderless)
         }
         .navigationBarTitleDisplayMode(.inline)

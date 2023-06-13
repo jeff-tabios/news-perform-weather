@@ -1,8 +1,8 @@
 //
-//  WeatherList.swift
+//  WeatherListItem.swift
 //  Weather
 //
-//  Created by Jeffrey Tabios on 6/13/23.
+//  Created by Jeffrey Tabios on 6/14/23.
 //
 
 import SwiftUI
@@ -15,12 +15,11 @@ struct WeatherListItem: View {
                 VStack(alignment: .leading) {
                     Text("CadeView")
                         .foregroundColor(Color("TextColor"))
-                        .font(.title)
+                        .font(.title2)
                         .fontWeight(.bold)
                     Text("Rain")
                         .foregroundColor(Color("TextColor"))
-                        .font(.title2)
-
+                        .font(.title3)
                 }
                 .padding()
                 Spacer()
@@ -28,8 +27,8 @@ struct WeatherListItem: View {
                     .foregroundColor(Color("TealColor"))
                     .fontWeight(.bold)
                     .font(.system(size: 54))
-                    .padding()
             }
+            .padding()
             Divider()
         }
         .padding(.leading, 20)
@@ -38,27 +37,9 @@ struct WeatherListItem: View {
     }
 }
 
-struct WeatherList: View {
-
-    var body: some View {
-        ScrollView {
-            WeatherListItem()
-            WeatherListItem()
-            WeatherListItem()
-            WeatherListItem()
-            WeatherListItem()
-            WeatherListItem()
-            WeatherListItem()
-            WeatherListItem()
-            WeatherListItem()
-            WeatherListItem()
-        }
-        .scrollIndicators(.hidden)
-    }
-}
-
-struct WeatherList_Previews: PreviewProvider {
+struct WeatherListItem_Previews: PreviewProvider {
     static var previews: some View {
-        WeatherList()
+        WeatherListItem()
+            .border(.red)
     }
 }

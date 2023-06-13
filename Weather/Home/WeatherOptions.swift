@@ -22,6 +22,7 @@ struct SortOption: View {
                 Text(title)
                     .foregroundColor(Color("TextColor"))
                     .fontWeight(isSelected ? .bold : .regular)
+                    .font(.title3)
                     .padding(.horizontal, 5)
                     .padding(.top, 15)
                     .padding(.bottom, 15)
