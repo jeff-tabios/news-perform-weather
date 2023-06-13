@@ -32,10 +32,12 @@ struct CountryItem: View {
 }
 
 struct CountryListHeader: View {
+    @Environment(\.dismiss) var dismiss
+
     var body: some View {
         ZStack {
             Rectangle()
-                .frame(width: .infinity, height: 60)
+                .frame(height: 60)
                 .foregroundColor(Color("GreenColor"))
             Text("Countries")
                 .foregroundColor(.white)
@@ -43,7 +45,7 @@ struct CountryListHeader: View {
                 .font(.title3)
             HStack {
                 Button {
-
+                    dismiss()
                 } label: {
                     Image(systemName: "xmark")
                         .foregroundColor(.white)

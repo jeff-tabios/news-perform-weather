@@ -10,6 +10,7 @@ import SwiftUI
 struct WeatherPage: View {
 
     @State var selectedButton: SortOptions = .aToZ
+    @State private var showingFilter = false
 
     var body: some View {
         VStack {
@@ -17,12 +18,15 @@ struct WeatherPage: View {
             WeatherList()
             Divider()
             Button {
-
+                showingFilter.toggle()
             } label: {
                 Text("Filter")
                     .font(.title3)
                     .frame(maxWidth: .infinity)
                     .foregroundColor(Color("TextColor"))
+            }
+            .sheet(isPresented: $showingFilter) {
+                CountryList()
             }
             .padding(.top, 10)
             .padding(.bottom, 10)

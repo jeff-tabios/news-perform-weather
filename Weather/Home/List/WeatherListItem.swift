@@ -8,9 +8,12 @@
 import SwiftUI
 
 struct WeatherListItem: View {
-
+    @State var isTapped: Bool = false
     var body: some View {
         VStack {
+            NavigationLink(destination: WeatherDetail(), isActive: $isTapped) {
+                EmptyView()
+            }
             HStack {
                 VStack(alignment: .leading) {
                     Text("CadeView")
@@ -27,6 +30,9 @@ struct WeatherListItem: View {
                     .foregroundColor(Color("TealColor"))
                     .fontWeight(.bold)
                     .font(.system(size: 54))
+            }
+            .onTapGesture {
+                isTapped = true
             }
             .padding()
             Divider()

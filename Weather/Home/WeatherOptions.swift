@@ -26,11 +26,13 @@ struct SortOption: View {
                     .padding(.horizontal, 5)
                     .padding(.top, 15)
                     .padding(.bottom, 15)
+                    .frame(maxWidth: .infinity)
                     .overlay(Rectangle()
                         .frame(height: isSelected ? 3 : 0,alignment: .bottom)
                         .foregroundColor(Color("TealColor")),
                              alignment: .bottom)
             }
+            .frame(maxWidth: .infinity)
         }
     }
 }
@@ -44,19 +46,22 @@ struct WeatherOptions: View {
                 Rectangle()
                     .frame(width: nil, height: 1)
                     .foregroundColor(Color("LineColor"))
-                    .padding(.top, 45)
+                    .padding(.top, 50)
             }
 
             HStack {
                 SortOption(title: "A-Z", isSelected: selectedButton == .aToZ) {
                     selectedButton = .aToZ
                 }
+                .frame(width: 60)
                 SortOption(title: "Temperature", isSelected: selectedButton == .temperature) {
                     selectedButton = .temperature
                 }
+                .frame(width: 140)
                 SortOption(title: "Last Updated", isSelected: selectedButton == .lastUpdated) {
                     selectedButton = .lastUpdated
                 }
+                .frame(width: 140)
                 Spacer()
             }
             .padding(.leading, 10)
