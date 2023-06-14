@@ -24,6 +24,7 @@ final class WeatherManager: WeatherManagerProtocol {
     init(service: NetworkServiceProtocol = NetworkService()) {
         self.service = service
     }
+
     func getWeatherData() throws {
         guard let url = URL(string: weatherUrl) else {return}
 

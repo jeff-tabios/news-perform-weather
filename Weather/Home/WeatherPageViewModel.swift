@@ -16,6 +16,10 @@ final class WeatherPageViewModel: ObservableObject {
     }
 
     func refreshData() {
-
+        do {
+            try manager.getWeatherData()
+        } catch {
+            print(error)
+        }
     }
 }

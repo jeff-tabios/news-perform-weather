@@ -6,31 +6,33 @@
 //
 
 import XCTest
+import Combine
 @testable import Weather
 
 final class WeatherTests: XCTestCase {
+    
+    func test_Get_Weather_Data_Should_Get_Data() {
+        let manager = WeatherManager(service: MockService())
+        let sut = WeatherPageViewModel(manager: manager)
+        var cancellables = Set<AnyCancellable>()
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        let exp = expectation(description: "Loading weather data")
+
+        manager.weatherData
+            .sink { (completion) in
+                print(completion)
+            } receiveValue: { data in
+                if !data.isEmpty {
+                    print(data)
+                    exp.fulfill()
+                }
+            }
+            .store(in: &cancellables)
+
+        sut.refreshData()
+
+        wait(for: [exp], timeout: 3)
+
+        XCTAssertEqual(manager.weatherData.value.count, 1)
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
 }
