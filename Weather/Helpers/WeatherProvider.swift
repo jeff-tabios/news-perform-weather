@@ -9,8 +9,8 @@ import Foundation
 import Combine
 
 protocol WeatherProviderProtocol {
-    func getWeatherData() throws
-    func processWeatherData()
+    var weatherData: CurrentValueSubject<[WeatherData], Error> { get }
+    func getWeatherData()
 }
 
 final class WeatherProvider: WeatherProviderProtocol {
@@ -23,10 +23,9 @@ final class WeatherProvider: WeatherProviderProtocol {
 
     init(service: NetworkServiceProtocol = NetworkService()) {
         self.service = service
-        addSubscriptions()
     }
 
-    func getWeatherData() throws {
+    func getWeatherData() {
         guard let url = URL(string: weatherUrl) else {return}
 
         do {
@@ -45,24 +44,7 @@ final class WeatherProvider: WeatherProviderProtocol {
                 }
                 .store(in: &cancellables)
         } catch {
-            throw error
+            print(error)
         }
-    }
-
-    func addSubscriptions() {
-        weatherData
-            .sink { (completion) in
-
-            } receiveValue: { [weak self] data in
-                if !data.isEmpty {
-                    self?.processWeatherData()
-                }
-            }
-            .store(in: &cancellables)
-
-    }
-
-    func processWeatherData() {
-
     }
 }

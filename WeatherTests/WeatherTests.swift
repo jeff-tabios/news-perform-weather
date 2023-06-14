@@ -12,13 +12,12 @@ import Combine
 final class WeatherTests: XCTestCase {
     
     func test_Get_Weather_Data_Should_Get_Data() {
-        let provider = WeatherProvider(service: MockService())
-        let sut = WeatherPageViewModel(provider: provider)
+        let sut = WeatherProvider(service: MockService())
         var cancellables = Set<AnyCancellable>()
 
         let exp = expectation(description: "Loading weather data")
-
-        provider.weatherData
+        sut.getWeatherData()
+        sut.weatherData
             .sink { (completion) in
                 print(completion)
             } receiveValue: { data in
@@ -29,10 +28,8 @@ final class WeatherTests: XCTestCase {
             }
             .store(in: &cancellables)
 
-        sut.refreshData()
-
         wait(for: [exp], timeout: 3)
 
-        XCTAssertEqual(provider.weatherData.value.count, 1)
+        XCTAssertEqual(sut.weatherData.value.count, 1)
     }
 }

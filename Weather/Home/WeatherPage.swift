@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct WeatherPage: View {
-
+    @StateObject var vm = WeatherPageViewModel()
     @State var selectedButton: SortOptions = .aToZ
     @State private var showingFilter = false
 
