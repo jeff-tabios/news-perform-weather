@@ -8,12 +8,12 @@
 import Foundation
 import Combine
 
-protocol WeatherManagerProtocol {
+protocol WeatherProviderProtocol {
     func getWeatherData() throws
     func processWeatherData()
 }
 
-final class WeatherManager: WeatherManagerProtocol {
+final class WeatherProvider: WeatherProviderProtocol {
     private let weatherUrl = "https://dnu5embx6omws.cloudfront.net/venues/weather.json"
     private let service: NetworkServiceProtocol
     private var cancellables = Set<AnyCancellable>()
@@ -23,6 +23,7 @@ final class WeatherManager: WeatherManagerProtocol {
 
     init(service: NetworkServiceProtocol = NetworkService()) {
         self.service = service
+        addSubscriptions()
     }
 
     func getWeatherData() throws {
@@ -48,7 +49,20 @@ final class WeatherManager: WeatherManagerProtocol {
         }
     }
 
+    func addSubscriptions() {
+        weatherData
+            .sink { (completion) in
+
+            } receiveValue: { [weak self] data in
+                if !data.isEmpty {
+                    self?.processWeatherData()
+                }
+            }
+            .store(in: &cancellables)
+
+    }
+
     func processWeatherData() {
-        //Pre sort
+
     }
 }

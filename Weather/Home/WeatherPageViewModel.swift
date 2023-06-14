@@ -9,15 +9,16 @@ import Foundation
 import Combine
 
 final class WeatherPageViewModel: ObservableObject {
-    let manager: WeatherManagerProtocol
+    let provider: WeatherProviderProtocol
 
-    init(manager: WeatherManagerProtocol = WeatherManager()) {
-        self.manager = manager
+    init(provider: WeatherProviderProtocol = WeatherProvider()) {
+        self.provider = provider
     }
 
     func refreshData() {
         do {
-            try manager.getWeatherData()
+            try provider.getWeatherData()
+            print("success")
         } catch {
             print(error)
         }

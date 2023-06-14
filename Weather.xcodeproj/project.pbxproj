@@ -20,7 +20,7 @@
 		BE22A60C2A39ACD000D8F571 /* WeatherPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE22A60B2A39ACD000D8F571 /* WeatherPageViewModel.swift */; };
 		BE22A6102A39AE0700D8F571 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE22A60F2A39AE0700D8F571 /* Weather.swift */; };
 		BE22A6132A39D01800D8F571 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE22A6122A39D01800D8F571 /* NetworkService.swift */; };
-		BE22A6152A39D02900D8F571 /* WeatherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE22A6142A39D02900D8F571 /* WeatherManager.swift */; };
+		BE22A6152A39D02900D8F571 /* WeatherProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE22A6142A39D02900D8F571 /* WeatherProvider.swift */; };
 		BE22A61C2A3A53B000D8F571 /* MockService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE22A61B2A3A53B000D8F571 /* MockService.swift */; };
 /* End PBXBuildFile section */
 
@@ -50,7 +50,7 @@
 		BE22A60B2A39ACD000D8F571 /* WeatherPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherPageViewModel.swift; sourceTree = "<group>"; };
 		BE22A60F2A39AE0700D8F571 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		BE22A6122A39D01800D8F571 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
-		BE22A6142A39D02900D8F571 /* WeatherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherManager.swift; sourceTree = "<group>"; };
+		BE22A6142A39D02900D8F571 /* WeatherProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherProvider.swift; sourceTree = "<group>"; };
 		BE22A61B2A3A53B000D8F571 /* MockService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -169,7 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				BE22A6122A39D01800D8F571 /* NetworkService.swift */,
-				BE22A6142A39D02900D8F571 /* WeatherManager.swift */,
+				BE22A6142A39D02900D8F571 /* WeatherProvider.swift */,
 				BE22A61B2A3A53B000D8F571 /* MockService.swift */,
 			);
 			path = Helpers;
@@ -280,7 +280,7 @@
 				BE1936412A386CAB00412F4A /* ContentView.swift in Sources */,
 				BE1936712A38B3E000412F4A /* WeatherOptions.swift in Sources */,
 				BE22A6102A39AE0700D8F571 /* Weather.swift in Sources */,
-				BE22A6152A39D02900D8F571 /* WeatherManager.swift in Sources */,
+				BE22A6152A39D02900D8F571 /* WeatherProvider.swift in Sources */,
 				BE22A61C2A3A53B000D8F571 /* MockService.swift in Sources */,
 				BE1936732A38CE5A00412F4A /* CountryList.swift in Sources */,
 				BE22A60C2A39ACD000D8F571 /* WeatherPageViewModel.swift in Sources */,
