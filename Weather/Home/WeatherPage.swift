@@ -28,6 +28,7 @@ struct WeatherPage: View {
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
+                    selectedTab = .aToZ
                     vm.refreshData()
                 } label: {
                     Image(systemName: "arrow.clockwise")
