@@ -13,28 +13,6 @@ struct Weather: Codable {
     let data: [WeatherData]
 }
 
-/*
- {
-     "_venueID": "97",
-     "_name": "Adelaide River",
-     "_country": {
-         "_countryID": "16",
-         "_name": "Australia"
-     },
-     "_weatherCondition": "Partly Cloudy",
-     "_weatherConditionIcon": "partlycloudy",
-     "_weatherWind": "Wind: ESE at 17kph",
-     "_weatherHumidity": "Humidity: 65%",
-     "_weatherTemp": "27",
-     "_weatherFeelsLike": "34",
-     "_sport": {
-         "_sportID": "1",
-         "_description": "Horse Racing"
-     },
-     "_weatherLastUpdated": 1401666605
- },
- */
-
 // MARK: - WeatherData
 struct WeatherData: Codable, Hashable {
     var identifier: String {
@@ -65,6 +43,14 @@ struct WeatherData: Codable, Hashable {
 
     static func == (lhs: WeatherData, rhs: WeatherData) -> Bool {
         lhs.identifier == rhs.identifier
+    }
+
+    func datePretty() -> String {
+        guard let lastUpdate = weatherLastUpdated else { return "" }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "h:mma dd MMM yyyy"
+        let date = Date(timeIntervalSince1970: TimeInterval(lastUpdate))
+        return dateFormatter.string(from: date)
     }
 }
 

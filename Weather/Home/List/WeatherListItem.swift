@@ -28,6 +28,9 @@ struct WeatherListItem: View {
                         Text(weather.weatherCondition ?? "")
                             .foregroundColor(Color("TextColor"))
                             .font(.title3)
+                        Text(weather.datePretty())
+                            .foregroundColor(Color("TextColor"))
+                            .font(.subheadline)
                     }
                     .padding()
                     Spacer()

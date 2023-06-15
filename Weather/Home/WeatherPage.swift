@@ -10,27 +10,31 @@ import SwiftUI
 struct WeatherPage: View {
     @StateObject var vm = WeatherPageViewModel()
     @State var selectedTab: SortOptions = .aToZ
-    @State private var showingFilter = false
 
     var body: some View {
         VStack {
-            WeatherOptions(selectedTab: $selectedTab, vm: vm)
-            WeatherList(selectedTab: $selectedTab, vm: vm)
-            Divider()
-            Button {
-                showingFilter.toggle()
-            } label: {
-                Text("Filter")
+            if vm.isRefreshing {
+                Text("Loading...")
+                    .foregroundColor(Color("GreenColor"))
                     .font(.title3)
-                    .frame(maxWidth: .infinity)
-                    .foregroundColor(Color("TextColor"))
+
+            } else {
+                WeatherOptions(selectedTab: $selectedTab, vm: vm)
+                WeatherList(selectedTab: $selectedTab, vm: vm)
+                Divider()
+                FilterButton(vm: vm)
             }
-            .sheet(isPresented: $showingFilter) {
-                CountryList()
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    vm.refreshData()
+                } label: {
+                    Image(systemName: "arrow.clockwise")
+                        .foregroundColor(.white)
+                }
+                .disabled(vm.isRefreshing ? true : false)
             }
-            .padding(.top, 10)
-            .padding(.bottom, 10)
-            .buttonStyle(.borderless)
         }
         .navigationBarTitleDisplayMode(.inline)
         .navigationTitle("Weather")

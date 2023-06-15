@@ -7,30 +7,6 @@
 
 import SwiftUI
 
-struct CountryItem: View {
-    var body: some View {
-        Button {
-            //Action goes here
-        } label: {
-            VStack {
-                HStack {
-                    Text("Australia")
-                        .foregroundColor(Color("TextColor"))
-                        .font(.title2)
-                    Spacer()
-                    Image(systemName: "chevron.right")
-                        .foregroundColor(Color("TealColor"))
-                        .imageScale(.large)
-                }
-                .padding()
-                Divider()
-            }
-            .padding(.leading)
-            .padding(.trailing)
-        }
-    }
-}
-
 struct CountryListHeader: View {
     @Environment(\.dismiss) var dismiss
 
@@ -59,20 +35,20 @@ struct CountryListHeader: View {
 }
 
 struct CountryList: View {
+    @ObservedObject var vm: WeatherPageViewModel
+    @Binding var showingFilter: Bool
+
     var body: some View {
         VStack {
             CountryListHeader()
             ScrollView {
-                CountryItem()
-                CountryItem()
-                CountryItem()
-                CountryItem()
-                CountryItem()
-                CountryItem()
-                CountryItem()
-                CountryItem()
-                CountryItem()
-                CountryItem()
+                VStack {
+                    ForEach(vm.countries, id: \.self) { country in
+                        VStack(alignment: .leading) {
+                            CountryItem(vm: vm, showingFilter: $showingFilter, name: country)
+                        }
+                    }
+                }
             }
         }
     }
@@ -80,6 +56,6 @@ struct CountryList: View {
 
 struct CountryList_Previews: PreviewProvider {
     static var previews: some View {
-        CountryList()
+        CountryList(vm: WeatherPageViewModel(), showingFilter: .constant(true))
     }
 }

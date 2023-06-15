@@ -12,7 +12,25 @@ struct WeatherDetail: View {
 
     var body: some View {
         VStack {
-            WeatherListItem(weather: weather)
+            HStack {
+                VStack(alignment: .leading) {
+                    Text(weather.name)
+                        .foregroundColor(Color("TextColor"))
+                        .font(.title2)
+                        .fontWeight(.bold)
+                    Text(weather.weatherCondition ?? "")
+                        .foregroundColor(Color("TextColor"))
+                        .font(.title3)
+                }
+                .padding()
+                Spacer()
+                Text("\(weather.weatherTemp ?? "")°")
+                    .foregroundColor(Color("TealColor"))
+                    .fontWeight(.bold)
+                    .font(.system(size: 54))
+            }
+            .padding()
+            Divider()
             HStack {
                 Spacer()
                 VStack(alignment: .leading) {
@@ -47,7 +65,7 @@ struct WeatherDetail: View {
                 Spacer()
             }
             Divider()
-            Text("Last Updated 9:00am 01 December 2017")
+            Text("Last Updated \(weather.datePretty())")
                 .foregroundColor(Color("TextColor"))
             Spacer()
         }

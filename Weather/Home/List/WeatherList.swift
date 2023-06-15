@@ -31,14 +31,13 @@ struct ScrollingList: View {
     var list: [WeatherData]
 
     var body: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false) {
             VStack {
                 ForEach(list, id: \.self) { weather in
                     WeatherListItem(weather: weather)
                 }
             }
         }
-        .scrollIndicators(.hidden)
     }
 }
 

@@ -19,6 +19,7 @@ final class WeatherPageViewModel: ObservableObject {
     private(set) var weatherDataSortedByAToZ: [WeatherData] = []
     private(set) var weatherDataSortedByTemp: [WeatherData] = []
     private(set) var weatherDataSortedByLastUpdate: [WeatherData] = []
+    var countries: [String] = []
 
     init(provider: WeatherProviderProtocol = WeatherProvider()) {
         self.provider = provider
@@ -26,8 +27,14 @@ final class WeatherPageViewModel: ObservableObject {
         refreshData()
     }
 
+    func setFilter(filter: String = "") {
+        self.filter = filter
+        configureData()
+    }
+
     func refreshData() {
         isRefreshing = true
+        self.filter = ""
         provider.getWeatherData()
     }
 
@@ -43,28 +50,31 @@ final class WeatherPageViewModel: ObservableObject {
             } receiveValue: { [weak self] data in
                 if !data.isEmpty {
                     self?.weatherData = data
-                    self?.preSortData()
-                    self?.isRefreshing = false
+                    self?.configureData()
                 }
             }
             .store(in: &cancellables)
     }
 
-    private func preSortData() {
+    private func configureData() {
         weatherDataSortedByAToZ = weatherData.sorted {
             $0.name < $1.name
-        }
+        }.filter { !filter.isEmpty ? $0.country.name == filter : true }
 
         weatherDataSortedByTemp = weatherData.sorted {
             guard let first = $0.weatherTemp,
                     let second = $1.weatherTemp else { return false }
             return first < second
-        }
+        }.filter { !filter.isEmpty ? $0.country.name == filter : true }
 
         weatherDataSortedByLastUpdate = weatherData.sorted {
             guard let first = $0.weatherLastUpdated,
                     let second = $1.weatherLastUpdated else { return false }
-            return first < second
-        }
+            return first > second
+        }.filter { !filter.isEmpty ? $0.country.name == filter : true }
+
+        countries = Array(Set(weatherData.map { $0.country.name })).sorted{ $0 < $1 }
+
+        isRefreshing = false
     }
 }
