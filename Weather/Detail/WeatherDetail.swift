@@ -8,36 +8,38 @@
 import SwiftUI
 
 struct WeatherDetail: View {
+    var weather: WeatherData
+
     var body: some View {
         VStack {
-            WeatherListItem()
+            WeatherListItem(weather: weather)
             HStack {
                 Spacer()
                 VStack(alignment: .leading) {
                     Text("Feels Like")
                         .font(.title3)
                         .fontWeight(.bold)
-                    Text("16°")
+                    Text(weather.weatherFeelsLike ?? "")
                         .font(.title3)
                         .fontWeight(.bold)
                         .foregroundColor(Color("TealColor"))
                 }
                 Spacer()
                 VStack(alignment: .leading) {
-                    Text("Feels Like")
+                    Text("Humidity")
                         .font(.title3)
                         .fontWeight(.bold)
-                    Text("16°")
+                    Text(weather.weatherHumidity?.replacingOccurrences(of: "Humidity: ", with: "") ?? "")
                         .font(.title3)
                         .fontWeight(.bold)
                         .foregroundColor(Color("TealColor"))
                 }
                 Spacer()
                 VStack(alignment: .leading) {
-                    Text("Feels Like")
+                    Text("Wind")
                         .font(.title3)
                         .fontWeight(.bold)
-                    Text("16°")
+                    Text(weather.weatherWind?.replacingOccurrences(of: "Wind: ", with: "") ?? "")
                         .font(.title3)
                         .fontWeight(.bold)
                         .foregroundColor(Color("TealColor"))
@@ -56,8 +58,17 @@ struct WeatherDetail: View {
 
 struct WeatherDetail_Previews: PreviewProvider {
     static var previews: some View {
+        let mockData = WeatherData(venueID: "97",
+                                   name: "Adelaide River",
+                                   country: Country(countryID: "16", name: "Australia"),
+                                   weatherCondition: "Partly Cloudy",
+                                   weatherWind: "Wind: ESE at 17kph",
+                                   weatherHumidity: "Humidity: 65%",
+                                   weatherTemp: "27",
+                                   weatherFeelsLike: "34",
+                                   weatherLastUpdated: 1401666605)
         NavigationView {
-            WeatherDetail()
+            WeatherDetail(weather: mockData)
         }
     }
 }

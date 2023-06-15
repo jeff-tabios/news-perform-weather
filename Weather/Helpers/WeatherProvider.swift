@@ -40,7 +40,7 @@ final class WeatherProvider: WeatherProviderProtocol {
                         print(error.localizedDescription)
                     }
                 } receiveValue: { [weak self] weather in
-                    self?.weatherData.send(weather)
+                    self?.weatherData.send(weather.filter { $0.weatherTemp != nil })
                 }
                 .store(in: &cancellables)
         } catch {

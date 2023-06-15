@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum SortOptions {
+enum SortOptions: Int {
     case aToZ, temperature, lastUpdated
 }
 
@@ -38,7 +38,8 @@ struct SortOption: View {
 }
 
 struct WeatherOptions: View {
-    @Binding var selectedButton: SortOptions
+    @Binding var selectedTab: SortOptions
+    @ObservedObject var vm: WeatherPageViewModel
 
     var body: some View {
         ZStack {
@@ -50,29 +51,29 @@ struct WeatherOptions: View {
             }
 
             HStack {
-                SortOption(title: "A-Z", isSelected: selectedButton == .aToZ) {
-                    selectedButton = .aToZ
+                SortOption(title: "A-Z", isSelected: selectedTab == .aToZ) {
+                    selectedTab = .aToZ
                 }
                 .frame(width: 60)
-                SortOption(title: "Temperature", isSelected: selectedButton == .temperature) {
-                    selectedButton = .temperature
+                SortOption(title: "Temperature", isSelected: selectedTab == .temperature) {
+                    selectedTab = .temperature
                 }
                 .frame(width: 140)
-                SortOption(title: "Last Updated", isSelected: selectedButton == .lastUpdated) {
-                    selectedButton = .lastUpdated
+                SortOption(title: "Last Updated", isSelected: selectedTab == .lastUpdated) {
+                    selectedTab = .lastUpdated
                 }
                 .frame(width: 140)
                 Spacer()
             }
             .padding(.leading, 10)
-            .animation(.easeInOut(duration: 0.2), value: selectedButton)
         }
     }
 }
 
 struct WeatherOptions_Previews: PreviewProvider {
     static var previews: some View {
-        WeatherOptions(selectedButton: .constant(.aToZ))
-            .border(.green)
+        WeatherOptions(selectedTab: .constant(.aToZ),
+                       vm: WeatherPageViewModel())
+        .border(.green)
     }
 }

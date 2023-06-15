@@ -36,7 +36,11 @@ struct Weather: Codable {
  */
 
 // MARK: - WeatherData
-struct WeatherData: Codable {
+struct WeatherData: Codable, Hashable {
+    var identifier: String {
+        return UUID().uuidString
+    }
+
     let venueID, name: String
     let country: Country
     let weatherCondition: String?
@@ -53,6 +57,14 @@ struct WeatherData: Codable {
         case weatherTemp = "_weatherTemp"
         case weatherFeelsLike = "_weatherFeelsLike"
         case weatherLastUpdated = "_weatherLastUpdated"
+    }
+
+    public func hash(into hasher: inout Hasher) {
+        return hasher.combine(identifier)
+    }
+
+    static func == (lhs: WeatherData, rhs: WeatherData) -> Bool {
+        lhs.identifier == rhs.identifier
     }
 }
 

@@ -9,13 +9,13 @@ import SwiftUI
 
 struct WeatherPage: View {
     @StateObject var vm = WeatherPageViewModel()
-    @State var selectedButton: SortOptions = .aToZ
+    @State var selectedTab: SortOptions = .aToZ
     @State private var showingFilter = false
 
     var body: some View {
         VStack {
-            WeatherOptions(selectedButton: $selectedButton)
-            WeatherList()
+            WeatherOptions(selectedTab: $selectedTab, vm: vm)
+            WeatherList(selectedTab: $selectedTab, vm: vm)
             Divider()
             Button {
                 showingFilter.toggle()
