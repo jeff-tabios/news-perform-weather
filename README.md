@@ -1,6 +1,7 @@
 # Weather app
 Downloads and displays weather data. 
-Allows filtering, refresh, view details and sorting
+Allows filtering, refresh, view details and sorting. 
+Built with example unit test with mock data.
 
 Used SwiftUI, MVVM and Combine
 
